@@ -23,6 +23,6 @@ public class ExperienciaController {
     @PostMapping("experiencias/crear")
     public String createExperiencia(@RequestBody Experiencias experiencia){
         experienciasService.saveExperiencia(experiencia);
-        return "La experiencia fue creada correctamene";
+        return "La experiencia fue creada correctamente";
     }
 }
