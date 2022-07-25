@@ -4,6 +4,7 @@ import com.portfolio.micv.model.Persona;
 import com.portfolio.micv.service.PersonaService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,18 +26,22 @@ public class PersonaController {
         return personaService.findPersona((long) 1);
     }
     
+    //Solo va a estar autorizado el admin en este caso para hacer post (en este caso)
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("personas/crear")
     public String createPersona(@RequestBody Persona persona){
         personaService.savePersona(persona);
         return "La persona fue creada correctamente";
     }
     
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("personas/borrar/{id}")
     public String deletePersona(@PathVariable Long id){
         personaService.deletePersona(id);
         return "La persona fue eliminada correctamente";
     }
     
+    @PreAuthorize("hasRole('ADMIN')")
     //Url puerto/personas/editar/id/parametro(nombre and apellido and img)
     @PutMapping("personas/editar/{id}")
     public Persona editPersona(@PathVariable Long id,
