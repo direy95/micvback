@@ -11,10 +11,21 @@ import lombok.Setter;
 @Getter @Setter
 public class Experiencias {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idExp;
-    private String titulo;
-    private String lugar;
+    private int id;
+    private String nombre;
+    private String descE;
     private int anoI;
     private int anoF;
     private String expImg;
+    
+    public Experiencias() {
+    }
+
+    public Experiencias(String nombre, String descE, int anoI, int anoF, String expImg) {
+        this.nombre = nombre;
+        this.descE = descE;
+        this.anoI = anoI;
+        this.anoF = anoF;
+        this.expImg = expImg;
+    }
 }

@@ -3,33 +3,40 @@ package com.portfolio.micv.service;
 import com.portfolio.micv.model.Experiencias;
 import com.portfolio.micv.repository.ExperienciasRepository;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ExperienciasService implements IExperienciasService {
-    @Autowired ExperienciasRepository experienciasRepository;
+public class ExperienciasService {
+    @Autowired ExperienciasRepository expRepository;
     
-    @Override
-    public List<Experiencias> getExperiencias() {
-        List <Experiencias> experiencias = experienciasRepository.findAll();
-        return experiencias;
+    public List<Experiencias> list(){
+        return expRepository.findAll();
     }
-
-    @Override
-    public void saveExperiencia(Experiencias experiencia) {
-        experienciasRepository.save(experiencia);
+    
+    public Optional<Experiencias> getOne(int id){
+        return expRepository.findById(id);
     }
-
-    @Override
-    public void delExperiencia(Long id) {
-        experienciasRepository.deleteById(id);
+    
+    public Optional<Experiencias> getByNombreE(String nombre){
+        return expRepository.findByNombre(nombre);
     }
-
-    @Override
-    public Experiencias findExperiencia(Long id) {
-        Experiencias experiencia = experienciasRepository.findById(id).orElse(null);
-        return experiencia;
+    
+    public void save (Experiencias exp){
+        expRepository.save(exp);
+    }
+    
+    public void delete(int id){
+        expRepository.deleteById(id);
+    }
+    
+    public boolean existsById(int id){
+        return expRepository.existsById(id);
+    }
+    
+    public boolean existsByNombreE(String nombreE){
+        return expRepository.existsByNombre(nombreE);
     }
     
 }
