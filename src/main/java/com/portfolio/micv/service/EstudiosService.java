@@ -3,33 +3,41 @@ package com.portfolio.micv.service;
 import com.portfolio.micv.model.Estudios;
 import com.portfolio.micv.repository.EstudiosRepository;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class EstudiosService implements IEstudiosService{
-    @Autowired EstudiosRepository estudiosRepository;
-            
-    @Override
-    public List<Estudios> getEstudio() {
-        List<Estudios> estudios = estudiosRepository.findAll();
-        return estudios;
+public class EstudiosService{
+    @Autowired EstudiosRepository estRepository;
+    
+    public List<Estudios> list(){
+        return estRepository.findAll();
     }
-
-    @Override
-    public void saveEstudio(Estudios estudio) {
-        estudiosRepository.save(estudio);
+    
+    public Optional<Estudios> getOne(int id){
+        return estRepository.findById(id);
     }
-
-    @Override
-    public void deleteEstudio(Long id) {
-        estudiosRepository.deleteById(id);
+    
+    public Optional<Estudios> getByNombreE(String nombre){
+        return estRepository.findByNombre(nombre);
     }
-
-    @Override
-    public Estudios findEstudio(Long id) {
-        Estudios estudio = estudiosRepository.findById(id).orElse(null);
-        return estudio;
+    
+    public void save (Estudios est){
+        estRepository.save(est);
     }
+    
+    public void delete(int id){
+        estRepository.deleteById(id);
+    }
+    
+    public boolean existsById(int id){
+        return estRepository.existsById(id);
+    }
+    
+    public boolean existsByNombre(String nombre){
+        return estRepository.existsByNombre(nombre);
+    }
+    
     
 }

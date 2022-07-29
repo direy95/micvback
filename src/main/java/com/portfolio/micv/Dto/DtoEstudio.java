@@ -1,13 +1,28 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.portfolio.micv.Dto;
 
-/**
- *
- * @author diegu
- */
+import javax.validation.constraints.NotBlank;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter @Setter
 public class DtoEstudio {
-    
+    @NotBlank
+    private String nombre;
+    @NotBlank
+    private String descEst;
+    @NotBlank
+    private int anoI;
+    private int anoF;
+    private String imgEdu;
+
+    public DtoEstudio() {
+    }
+
+    public DtoEstudio(String nombre, String descEst, int anoI, int anoF, String imgEdu) {
+        this.nombre = nombre;
+        this.descEst = descEst;
+        this.anoI = anoI;
+        this.anoF = anoF;
+        this.imgEdu = imgEdu;
+    }
 }
