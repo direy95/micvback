@@ -1,9 +1,12 @@
 package com.portfolio.micv.controller;
 
+import com.portfolio.micv.Dto.DtoPersona;
 import com.portfolio.micv.model.Persona;
+import com.portfolio.micv.security.controller.Mensaje;
 import com.portfolio.micv.service.PersonaService;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,7 +26,7 @@ public class PersonaController {
     @GetMapping("personas/traer")
     public Persona findPersona(){
         //long hace ref a tipo de dato que maneja el id
-        return personaService.findPersona((long) 1);
+        return personaService.findPersona((int) 1);
     }
     
     //Solo va a estar autorizado el admin en este caso para hacer post (en este caso)
@@ -36,24 +39,22 @@ public class PersonaController {
     
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("personas/borrar/{id}")
-    public String deletePersona(@PathVariable Long id){
+    public String deletePersona(@PathVariable int id){
         personaService.deletePersona(id);
         return "La persona fue eliminada correctamente";
     }
     
     @PreAuthorize("hasRole('ADMIN')")
-    //Url puerto/personas/editar/id/parametro(nombre and apellido and img)
     @PutMapping("personas/editar/{id}")
-    public Persona editPersona(@PathVariable Long id,
-                              @RequestParam("nombre") String nuevoNombre,
-                              @RequestParam("apellido") String nuevoApellido,
-                              @RequestParam("img") String nuevoImg){
-        Persona persona = personaService.findPersona(id);
-        persona.setNombre(nuevoNombre);
-        persona.setApellido(nuevoApellido);
-        persona.setImg(nuevoImg);
-        
-        personaService.savePersona(persona);
-        return persona;
+    public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody DtoPersona dtoP) {
+
+        Persona pers = personaService.getOne(id).get();
+        pers.setNombre(dtoP.getNombre());
+        pers.setApellido(dtoP.getApellido());
+        pers.setAcerca(dtoP.getAcerca());
+        pers.setImg(dtoP.getImg());
+
+        personaService.savePersona(pers);
+        return new ResponseEntity(new Mensaje("Persona actualizada"), HttpStatus.OK);
     }
 }

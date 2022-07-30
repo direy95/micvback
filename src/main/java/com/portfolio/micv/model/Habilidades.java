@@ -11,8 +11,17 @@ import lombok.Setter;
 @Getter @Setter
 public class Habilidades {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
     private String skill;
     private int porcentaje;
     private String img_skill;
+
+    public Habilidades() {
+    }
+
+    public Habilidades(String skill, int porcentaje, String img_skill) {
+        this.skill = skill;
+        this.porcentaje = porcentaje;
+        this.img_skill = img_skill;
+    }
 }

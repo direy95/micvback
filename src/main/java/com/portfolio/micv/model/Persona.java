@@ -15,10 +15,11 @@ import lombok.Setter;
 public class Persona {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
     private String nombre;
     private String apellido;
     private String img;
+    private String acerca;
     
     //Lazy es para hacer una consulta en especifica. No quiero que traiga todo
     //@OneToMany(fetch = FetchType.LAZY, mappedBy = "idEdu")
@@ -28,10 +29,11 @@ public class Persona {
         
     }
 
-    public Persona(Long id, String nombre, String apellido, String img) {
+    public Persona(int id, String nombre, String apellido, String img, String acerca) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.img = img;
+        this.acerca = acerca;
     }
 }

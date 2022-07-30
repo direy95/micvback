@@ -52,7 +52,7 @@ public class ExperienciaController {
             return new ResponseEntity(new Mensaje("Esa experiencia ya existe"), HttpStatus.BAD_REQUEST);
         }
 
-        Experiencias exp = new Experiencias(dtoE.getNombre(), dtoE.getDesc(), dtoE.getAnoI(), dtoE.getAnoF(), dtoE.getExpImg());
+        Experiencias exp = new Experiencias(dtoE.getNombre(), dtoE.getDescExp(), dtoE.getAnoI(), dtoE.getAnoF(), dtoE.getExpImg());
         expService.save(exp);
 
         return new ResponseEntity(new Mensaje("La experiencia fue agregada"), HttpStatus.OK);
@@ -75,7 +75,7 @@ public class ExperienciaController {
 
         Experiencias exp = expService.getOne(id).get();
         exp.setNombre(dtoE.getNombre());
-        exp.setDescE(dtoE.getDesc());
+        exp.setDescExp(dtoE.getDescExp());
 
         expService.save(exp);
         return new ResponseEntity(new Mensaje("Experiencia actualizada"), HttpStatus.OK);

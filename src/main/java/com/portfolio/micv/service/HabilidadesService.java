@@ -3,33 +3,42 @@ package com.portfolio.micv.service;
 import com.portfolio.micv.model.Habilidades;
 import com.portfolio.micv.repository.HabilidadesRepository;
 import java.util.List;
+import java.util.Optional;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class HabilidadesService implements IHabilidadesService{
-    @Autowired HabilidadesRepository habilidadesRepository;
+@Transactional
+public class HabilidadesService{
+    @Autowired HabilidadesRepository habRepo;
     
-    @Override
-    public List<Habilidades> getHabilidades() {
-        List<Habilidades> habilidad = habilidadesRepository.findAll();
-        return habilidad;
+    public List<Habilidades> list(){
+        return habRepo.findAll();
     }
-
-    @Override
-    public void saveHabilidad(Habilidades habilidad) {
-        habilidadesRepository.save(habilidad);
+    
+    public Optional<Habilidades> getOne(int id){
+        return habRepo.findById(id);
     }
-
-    @Override
-    public Habilidades findHabilidad(Long id) {
-        Habilidades habilidad = habilidadesRepository.findById(id).orElse(null);
-        return habilidad;
+    
+    public Optional<Habilidades> getByNombre(String skill){
+        return habRepo.findBySkill(skill);
     }
-
-    @Override
-    public void delHabilidad(Long id) {
-        habilidadesRepository.deleteById(id);
+    
+    public void save (Habilidades hab){
+        habRepo.save(hab);
+    }
+    
+    public void delete(int id){
+        habRepo.deleteById(id);
+    }
+    
+    public boolean existsById(int id){
+        return habRepo.existsById(id);
+    }
+    
+    public boolean existsBySkill(String skill){
+        return habRepo.existsBySkill(skill);
     }
     
 }
