@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(origins="https://micvfront-458c0.web.app")
+@CrossOrigin(origins="https://micvfront-458c0.firebaseapp.com")
 @RequestMapping("/habilidad")
 public class HabilidadesController {
     @Autowired
