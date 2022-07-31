@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/estudio")
-@CrossOrigin(origins = "https://micvfront-458c0.firebaseapp.com")
+@CrossOrigin(origins = "https://micvfront-458c0.web.app")
 public class EstudioController {
     @Autowired EstudiosService estService;
     
