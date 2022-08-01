@@ -48,10 +48,6 @@ public class EstudioController {
             return new ResponseEntity(new Mensaje("El nombre es obligatorio"), HttpStatus.BAD_REQUEST);
         }
 
-        if (estService.existsByNombre(dtoE.getNombre())) {
-            return new ResponseEntity(new Mensaje("Ese estudio ya existe"), HttpStatus.BAD_REQUEST);
-        }
-
         Estudios est = new Estudios(dtoE.getNombre(), dtoE.getDescEst(), dtoE.getAnoI(), dtoE.getAnoF(), dtoE.getImgEdu());
         estService.save(est);
 
@@ -64,10 +60,7 @@ public class EstudioController {
         if (!estService.existsById(id)) {
             return new ResponseEntity(new Mensaje("El id no existe"), HttpStatus.BAD_REQUEST);
         }
-        //Compara nombre de trabajos
-        if (estService.existsByNombre(dtoE.getNombre()) && estService.getByNombreE(dtoE.getNombre()).get().getId()!= id) {
-            return new ResponseEntity(new Mensaje("Ese estudio ya existe"), HttpStatus.BAD_REQUEST);
-        }
+
         //Verifica si está vacío
         if (StringUtils.isBlank(dtoE.getNombre())) {
             return new ResponseEntity(new Mensaje("El nombre es obligatorio"), HttpStatus.BAD_REQUEST);
