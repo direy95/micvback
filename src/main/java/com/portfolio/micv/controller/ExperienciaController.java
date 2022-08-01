@@ -76,6 +76,8 @@ public class ExperienciaController {
         Experiencias exp = expService.getOne(id).get();
         exp.setNombre(dtoE.getNombre());
         exp.setDescExp(dtoE.getDescExp());
+        exp.setAnoI(dtoE.getAnoI());
+        exp.setAnoF(dtoE.getAnoF());
 
         expService.save(exp);
         return new ResponseEntity(new Mensaje("Experiencia actualizada"), HttpStatus.OK);

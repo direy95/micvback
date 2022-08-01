@@ -69,6 +69,8 @@ public class EstudioController {
         Estudios est = estService.getOne(id).get();
         est.setNombre(dtoE.getNombre());
         est.setDescEst(dtoE.getDescEst());
+        est.setAnoI(dtoE.getAnoI());
+        est.setAnoF(dtoE.getAnoF());
 
         estService.save(est);
         return new ResponseEntity(new Mensaje("Estudio actualizado"), HttpStatus.OK);
