@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/estudio")
-@CrossOrigin
+@CrossOrigin(origins = "https://micvback.herokuapp.com/")
 public class EstudioController {
     @Autowired EstudiosService estService;
     
