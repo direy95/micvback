@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(origins = "https://micvback.herokuapp.com/")
+@CrossOrigin(origins = "https://micvfront-458c0.web.app")
 public class PersonaController {
     @Autowired PersonaService personaService;
     
